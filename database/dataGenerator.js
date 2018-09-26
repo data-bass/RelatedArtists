@@ -4,7 +4,7 @@ let faker = require ('faker');
 let connection = mysql.createConnection ({
   host: 'localhost',
   user: 'root',
-  password: 'password',
+  // password: 'password',
   database: 'artists',
 });
 
