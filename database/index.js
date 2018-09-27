@@ -22,7 +22,7 @@ const getRelatedArtists = function (id, showArtist) {
   });
 };
 
-const insertRelatedArtist = function (insert) {
+const insertArtist = function (insert) {
   connection.query(`insert into artist (artist_name, artistid, listeners, artist_image, popularSong) values ('test', 102, 102, 'test', 'test');`, function(err, result) {
     if (err) {
       console.log('error posting');
@@ -31,8 +31,22 @@ const insertRelatedArtist = function (insert) {
       console.log('success posting');
       insert(null, err)
     }
-  })
-}
+  });
+};
+
+const updateArtist = function (insert) {
+  connection.query(`update artist set artist_name = 'putArtist' where artistID > 101;`, function(err, result) {
+    if (err) {
+      console.log('error posting');
+      insert(err, null);
+    } else {
+      console.log('success posting');
+      insert(null, err)
+    }
+  });
+};
+
 
 module.exports.getRelatedArtists = getRelatedArtists;
-module.exports.insertRelatedArtist = insertRelatedArtist;
+module.exports.insertArtist = insertArtist;
+module.exports.updateArtist = updateArtist;

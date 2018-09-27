@@ -27,9 +27,18 @@ app.post('/artist', function(req, res) {
     }
   });
 });
-//
-// app.put
-//
+
+app.put('/artist', function(req, res) {
+  db.updateArtist(function(err, data) {
+    if(err) {
+      res.status(500);
+      console.log(err)
+    } else {
+      console.log('successful put');
+    }
+  });
+});
+
 // app.delete
 
 app.listen (3002, () => {
