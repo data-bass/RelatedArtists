@@ -6,7 +6,7 @@ const client = new cassandra.Client({
   keyspace: 'test'
 });
 
-var results = 1000;
+var results = 5000;
 for (var i = 0; i <= results; i++) {
   const query = `INSERT INTO test (id, name) VALUES (?, ?)`;
   const params = [i, i];
