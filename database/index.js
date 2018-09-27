@@ -34,14 +34,26 @@ const insertArtist = function (insert) {
   });
 };
 
-const updateArtist = function (insert) {
+const updateArtist = function (update) {
   connection.query(`update artist set artist_name = 'putArtist' where artistID > 101;`, function(err, result) {
     if (err) {
-      console.log('error posting');
-      insert(err, null);
+      console.log('error updating');
+      update(err, null);
     } else {
-      console.log('success posting');
-      insert(null, err)
+      console.log('success updating');
+      update(null, err)
+    }
+  });
+};
+
+const deleteArtist = function (remove) {
+  connection.query(`delete from artist where artistID > 101;`, function(err, result) {
+    if (err) {
+      console.log('error deleting');
+      remove(err, null);
+    } else {
+      console.log('success deleting');
+      remove(null, err)
     }
   });
 };
@@ -50,3 +62,4 @@ const updateArtist = function (insert) {
 module.exports.getRelatedArtists = getRelatedArtists;
 module.exports.insertArtist = insertArtist;
 module.exports.updateArtist = updateArtist;
+module.exports.deleteArtist = deleteArtist;

@@ -39,7 +39,16 @@ app.put('/artist', function(req, res) {
   });
 });
 
-// app.delete
+app.delete('/artist', function(req, res) {
+  db.deleteArtist(function(err, data) {
+    if(err) {
+      res.status(500);
+      console.log(err)
+    } else {
+      console.log('successful delete');
+    }
+  });
+});
 
 app.listen (3002, () => {
   console.log ('listening on port 3002!');
