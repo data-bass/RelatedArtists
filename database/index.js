@@ -2,7 +2,7 @@ let mysql = require ('mysql');
 let connection = mysql.createConnection ({
   host: 'localhost',
   user: 'root',
-  password: 'password',
+  // password: 'password',
   database: 'artists',
 });
 
@@ -22,4 +22,17 @@ const getRelatedArtists = function (id, showArtist) {
   });
 };
 
+const insertRelatedArtist = function (insert) {
+  connection.query(`insert into artist (artist_name, artistid, listeners, artist_image, popularSong) values ('test', 102, 102, 'test', 'test');`, function(err, result) {
+    if (err) {
+      console.log('error posting');
+      insert(err, null);
+    } else {
+      console.log('success posting');
+      insert(null, err)
+    }
+  })
+}
+
 module.exports.getRelatedArtists = getRelatedArtists;
+module.exports.insertRelatedArtist = insertRelatedArtist;

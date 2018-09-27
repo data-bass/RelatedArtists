@@ -17,6 +17,21 @@ app.get (`/artist/:id/relatedArtists`, (req, res) => {
   });
 });
 
+app.post('/artist', function(req, res) {
+  db.insertRelatedArtist(function(err, data) {
+    if(err) {
+      res.status(500);
+      console.log(err)
+    } else {
+      console.log('successful post');
+    }
+  });
+});
+//
+// app.put
+//
+// app.delete
+
 app.listen (3002, () => {
   console.log ('listening on port 3002!');
 });
