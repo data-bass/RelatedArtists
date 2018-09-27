@@ -1,15 +1,15 @@
-#GET
+# GET
 >**/artist/:id/relatedArtists**
 >*gets all data from tables at id*
 
-#POST
+# POST
 >**/artist**
 >*inserts data into artist table*
 
-#PUT
+# PUT
 >**/artist**
 >*changes data in artist table*
 
-#DELETE
+# DELETE
 >**/artist**
 >*removes data in artist table*
