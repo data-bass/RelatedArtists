@@ -1,12 +1,12 @@
 const faker = require ('faker');
-var jsonfile = require('./../../artists9.json');
+var jsonfile = require('./../../artist9.json');
 const fs = require('fs');
 
 var obj = {
    results: []
 };
 
-fs.readFile('./../../artists9.json', 'utf8', function readFileCallback(err, data) {
+fs.readFile('./../../artist9.json', 'utf8', function readFileCallback(err, data) {
   if (err){
     console.log(err);
   } else {
@@ -15,8 +15,9 @@ fs.readFile('./../../artists9.json', 'utf8', function readFileCallback(err, data
       let insertCount = 1;
       let uniqueIdArr = [];
       let k = 0;
+      let randomId;
       while (k < 10) {
-        let randomId = Math.floor (Math.random () * Math.floor (1000000));
+        randomId = Math.floor (Math.random () * Math.floor (1000000));
         if (randomId === i) {
           continue;
         } else {
@@ -28,13 +29,13 @@ fs.readFile('./../../artists9.json', 'utf8', function readFileCallback(err, data
         id: i,
         artist_name: faker.name.findName(),
         listeners: faker.random.number(),
-        artist_image: `https://s3.amazonaws.com/spotifyphotos/${i % 39 + 1}.jpg`,
+        artist_image: `https://loremflickr.com/320/240/alien?lock=${randomId}`,
         popularSong: faker.lorem.word(),
         related_artists: uniqueIdArr
       });
     }
     json = JSON.stringify(obj);
-    fs.writeFile('./../../artists9.json', json, 'utf8', function(err) {
+    fs.writeFile('./../../artist9.json', json, 'utf8', function(err) {
       if (err) {
         console.log(err);
       } else {
