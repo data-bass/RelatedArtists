@@ -41,7 +41,7 @@ for (let i = 1; i < 101; i++) {
       continue;
     } else {
       k++;
-      uniqueIdArr.push (randomId);
+      uniqueIdArr.push(randomId);
     }
   }
   console.log ('i= ' + i + '   ' + uniqueIdArr);
