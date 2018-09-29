@@ -1,46 +1,30 @@
 const faker = require ('faker');
-var jsonfile = require('./../../artist9.json');
 const fs = require('fs');
 
-var obj = {
-   results: []
-};
+var string = 'id,artist_name,listeners,artist_image,popularSong,related_artists\n';
 
-fs.readFile('./../../artist9.json', 'utf8', function readFileCallback(err, data) {
-  if (err){
+for (let i = 1; i <= 1000000; i++) {
+  let insertCount = 1;
+  let uniqueIdArr = [];
+  let k = 0;
+  let randomId;
+  while (k < 10) {
+    randomId = Math.floor (Math.random () * Math.floor (1000000));
+    if (randomId === i) {
+      continue;
+    } else {
+      k++;
+      uniqueIdArr.push(`""${randomId}""`);
+    }
+  }
+  var csvArr = '"[' + uniqueIdArr + ']"'
+  string += `${i},${faker.name.findName()},${faker.random.number()},https://loremflickr.com/320/240/alien?lock=${randomId},${faker.lorem.word()},${csvArr}\n`
+}
+
+fs.writeFile('./../../artist0.csv', string, 'utf8', function(err) {
+  if (err) {
     console.log(err);
   } else {
-    obj = JSON.parse(data);
-    for (let i = 9000001; i <= 10000000; i++) {
-      let insertCount = 1;
-      let uniqueIdArr = [];
-      let k = 0;
-      let randomId;
-      while (k < 10) {
-        randomId = Math.floor (Math.random () * Math.floor (1000000));
-        if (randomId === i) {
-          continue;
-        } else {
-          k++;
-          uniqueIdArr.push(randomId);
-        }
-      }
-      obj.results.push({
-        id: i,
-        artist_name: faker.name.findName(),
-        listeners: faker.random.number(),
-        artist_image: `https://loremflickr.com/320/240/alien?lock=${randomId}`,
-        popularSong: faker.lorem.word(),
-        related_artists: uniqueIdArr
-      });
-    }
-    json = JSON.stringify(obj);
-    fs.writeFile('./../../artist9.json', json, 'utf8', function(err) {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log('success');
-      }
-    });
+    console.log('success');
   }
 });
