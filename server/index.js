@@ -1,14 +1,15 @@
-var express = require ('express');
-var app = express ();
-var db = require ('../database/index.js');
-const path = require ('path');
-var cors = require ('cors');
+const newrelic = require('newrelic');
+const express = require('express');
+const app = express();
+const db = require('../database/index.js');
+const path = require('path');
+const cors = require('cors');
 
 app.use (cors ());
 app.use (express.static (path.join (__dirname + '/../public')));
 
-// app.get (`/artist/:id/relatedArtists`, (req, res) => {
-app.get (`/artists`, (req, res) => {
+app.get(`/artist/:id/relatedArtists`, (req, res) => {
+// app.get (`/artists`, (req, res) => {
   db.getRelatedArtists (req.params.id, (error, data) => {
     if (error) {
       res.status (503).send (error);

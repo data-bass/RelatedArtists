@@ -1,41 +1,19 @@
-// let mysql = require ('mysql');
-// let connection = mysql.createConnection ({
-//   host: 'localhost',
-//   user: 'root',
-//   // password: 'password',
-//   database: 'artists',
-// });
-
-// const { Pool, Client } = require('pg');
 const { Client } = require('pg');
-const connectionString = 'postgres://MattRodigheri:MattRodigheri@localhost/artists';
-
-// const pool = new Pool({
-//   user: 'MattRodigheri',
-//   host: 'localhost',
-//   database: 'artists'
-// });
-//
-// pool.query('select * from artists where id = 1', (err, res) => {
-//   console.log(err, res)
-//   pool.end()
-// })
 
 const client = new Client({
-  connectionString: connectionString
+  connectionString: 'postgres://MattRodigheri:MattRodigheri@localhost/artists'
 });
 
 client.connect();
 
 const getRelatedArtists = function (id, showArtist) {
-  client.query('select * from artists where id = 1', function(err, data) {
+  client.query(`select * from artists where id = ${id}`, function(err, data) {
     if (err) {
       showArtist(err, null);
       console.log(err);
     } else {
       showArtist(null, data);
       console.log(data);
-      client.end();
     }
   });
 }
