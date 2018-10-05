@@ -1,0 +1,15 @@
+config:
+  target: 'http://localhost:3002'
+  processor: './test_loop.js'
+  phases:
+    - duration: 60
+      arrivalCount: 500
+  defaults:
+    headers:
+scenarios:
+  - flow:
+    - loop:
+      - function: 'generateRandomId'
+      - get:
+          url: '/artist/{{randomId}}/relatedArtists'
+        count: 1000
