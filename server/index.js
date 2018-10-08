@@ -13,7 +13,7 @@ app.get(`/artist/:id/relatedArtists`, (req, res) => {
     if (error) {
       res.status(503).send(error);
     } else {
-      res.send (data);
+      res.send (data.rows);
     }
   });
 });
