@@ -3,7 +3,7 @@ config:
   processor: './test_loop.js'
   phases:
     - duration: 60
-      arrivalCount: 500
+      arrivalCount: 700
   defaults:
     headers:
 scenarios:

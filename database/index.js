@@ -7,7 +7,7 @@ const client = new Client({
 client.connect();
 
 const getRelatedArtists = function (id, showArtist) {
-  client.query(`select * from artists where id = ${id}`, function(err, data) {
+  client.query(`select artist_name, listeners, image, song from artists where id in (select related_artist_id from artists inner join related_artists on artists.id = related_artists.artist_id where artists.id = ${id});`, function(err, data) {
     if (err) {
       showArtist(err, null);
       console.log(err);
