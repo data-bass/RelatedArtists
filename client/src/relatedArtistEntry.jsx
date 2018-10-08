@@ -29,7 +29,7 @@ class RelatedArtistEntry extends React.Component {
             <tr styleName="RAEntry">
               <td>
                 <Image
-                  src={this.props.artist.artist_image}
+                  src={this.props.artist.image}
                   circle
                   width="50"
                   height="50"
