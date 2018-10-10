@@ -7,9 +7,9 @@ const fs = require('fs');
 var string = 'id,artist_id,related_artist_id\n'; //postgres related_artists table
 // let k = 0;
 let randomId;
-let j = 9000000; //increment by 1 million, starting at 1
+let j = 8000000; //increment by 1 million, starting at 1
 
-for (let i = 90000001; i <= 100000000; i++) { //increment by 10 million
+for (let i = 80000001; i <= 90000000; i++) { //increment by 10 million
   // let uniqueIdArr = [];
   if (i % 10 === 0) {
     j++;
@@ -34,7 +34,7 @@ for (let i = 90000001; i <= 100000000; i++) { //increment by 10 million
 
 }
 
-fs.writeFile('./../../related_artist9.csv', string, 'utf8', function(err) {
+fs.writeFile('./../../related_artist8.csv', string, 'utf8', function(err) {
   if (err) {
     console.log(err);
   } else {

@@ -1,7 +1,12 @@
 const { Client } = require('pg');
 
 const client = new Client({
-  connectionString: 'postgres://MattRodigheri:MattRodigheri@localhost/artists'
+  // connectionString: 'postgres://MattRodigheri:MattRodigheri@localhost/artists'
+  user: 'power_user',
+  host: '18.219.58.118',
+  database: 'artists',
+  password: '$poweruserpassword',
+  port: '5432'
 });
 
 client.connect();
@@ -9,8 +14,8 @@ client.connect();
 const getRelatedArtists = function (id, showArtist) {
   client.query(`select artist_name, listeners, image, song from artists where id in (select related_artist_id from artists inner join related_artists on artists.id = related_artists.artist_id where artists.id = ${id});`, function(err, data) {
     if (err) {
-      showArtist(err, null);
       console.log(err);
+      showArtist(err, null);
     } else {
       showArtist(null, data);
       console.log(data);
