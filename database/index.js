@@ -18,7 +18,6 @@ const getRelatedArtists = function (id, showArtist) {
       showArtist(err, null);
     } else {
       showArtist(null, data);
-      console.log(data);
     }
   });
 }
