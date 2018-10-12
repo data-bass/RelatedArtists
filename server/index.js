@@ -4,17 +4,27 @@ const app = express();
 const db = require('../database/index.js');
 const path = require('path');
 const cors = require('cors');
+const redis = require('redis');
+const client = redis.createClient();
+
 
 app.use (cors ());
 app.use (express.static (path.join (__dirname + '/../public')));
 
 app.get(`/artist/:id/relatedArtists`, (req, res) => {
-  db.getRelatedArtists (req.params.id, (error, data) => {
-    if (error) {
-      res.status(503).send(error);
+  client.get(req.params.id, (err, data) => {
+    if (data) {
+      res.send(data);
     } else {
-      res.send (data.rows);
-    }
+      db.getRelatedArtists (req.params.id, (error, data) => {
+        if (error) {
+          res.status(503).send(error);
+        } else {
+          client.setex(req.params.id, 3600, JSON.stringify(data.rows))
+          res.send (data.rows);
+        }
+      });
+     }
   });
 });
 
